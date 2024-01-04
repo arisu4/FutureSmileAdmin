@@ -48,13 +48,7 @@ import AddStory from '../Components/AdminAbout/OurStory/AddStory';
 
 import Users from '../Components/Users/Users'
 import EditFaq from '../Components/AdminHome/Faq/EditFaq';
-
-
-
-
-
-
-
+import Private from '../Private';
 
 
 // const Home = lazy(() => import('../Pages/Home/Home'));
@@ -77,8 +71,6 @@ const ReusableLayout = () => (
 
 function AdminRoutes() {
 
-  
-
   return (
     <div>
   
@@ -87,45 +79,45 @@ function AdminRoutes() {
         
         <Route element={<ReusableLayout/>}>
          
-        <Route path="/adminhome" element={<Home/>} />
+        {/* <Route path="/adminhome" element={<Home/>} /> */}
+        <Route path="/adminhome" element={<Private Component={Home}/>} />
+        <Route path="/faq" element={<Private Component={Faq}/>} />
+        <Route path="/addfaq" element={<Private Component={AddFaq}/>} />
+        <Route path="/editfaq/:id" element={<Private Component={EditFaq}/>}/>
 
-        <Route path="/faq" element={<Faq/>} />
-        <Route path="/addfaq" element={<AddFaq/>} />
-        <Route path="/editfaq/:id" element={<EditFaq />} />
+        <Route path="/videos" element={<Private Component={Videos}/>}/>
+        <Route path="/addvideos" element={<Private Component={AddVideos}/>} />
 
-        <Route path="/videos" element={<Videos/>} />
-        <Route path="/addvideos" element={<AddVideos/>} />
-
-        <Route path="/story" element={<OurStory/>} />
-        <Route path="/addstory" element={<AddStory/>} />
+        <Route path="/story" element={<Private Component={OurStory}/>} />
+        <Route path="/addstory" element={<Private Component={AddStory}/>} />
         
-        <Route path="/teams" element={<Team/>} />
-        <Route path="/addmembers" element={<AddTeam/>} />
-        <Route path="/editteam/:id" element={<EditTeam/>} />
+        <Route path="/teams" element={<Private Component={Team}/>} />
+        <Route path="/addmembers" element={<Private Component={AddTeam}/>} />
+        <Route path="/editteam/:id" element={<Private Component={EditTeam}/>} />
 
-        <Route path="/brands" element={<Brands />} />
-        <Route path="/addbrands" element={<AddBrands />} />
+        <Route path="/brands" element={<Private Component={Brands}/>} />
+        <Route path="/addbrands" element={<Private Component={AddBrands}/>} />
 
-        <Route path="/testimonials" element={<Testimonials/>} />
-        <Route path="/addtestimonials" element={<AddTestimonials/>} />
-        <Route path="/edittestimonials/:id" element={<EditTestimonials/>} />
+        <Route path="/testimonials" element={<Private Component={Testimonials}/>} />
+        <Route path="/addtestimonials" element={<Private Component={AddTestimonials}/>} />
+        <Route path="/edittestimonials/:id" element={<Private Component={EditTestimonials}/>} />
 
-        <Route path="/services" element={<Services />} />
-        <Route path="/addservices" element={<AddServices />} />
-        <Route path="/editservices/:id" element={<EditServices />} />
+        <Route path="/services" element={<Private Component={Services}/>} />
+        <Route path="/addservices" element={<Private Component={AddServices}/>} />
+        <Route path="/editservices/:id" element={<Private Component={EditServices}/>} />
 
-        <Route path="/adminblog" element={<Blog />} />
+        <Route path="/adminblog" element={<Private Component={Blog}/>} />
 
 
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/addgallery" element={<AddGallery/>}/>
-        <Route path="/editgallery/:id" element={<EditGallery/>}/>
+        <Route path="/gallery" element={<Private Component={Gallery}/>} />
+        <Route path="/addgallery" element={<Private Component={AddGallery}/>}/>
+        <Route path="/editgallery/:id" element={<Private Component={EditGallery}/>}/>
         
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/addcontact" element={<AddContact />} />
-        <Route path="/editcontact/:id" element={<EditContact/>} />
+        <Route path="/contact" element={<Private Component={Contact}/>} />
+        <Route path="/addcontact" element={<Private Component={AddContact}/>} />
+        <Route path="/editcontact/:id" element={<Private Component={EditContact}/>} />
 
-        <Route path="/users" element={<Users />} />
+        <Route path="/users" element={<Private Component={Users}/>} />
        
         </Route>
        
@@ -135,5 +127,4 @@ function AdminRoutes() {
     </div>
   )
 }
-
 export default AdminRoutes

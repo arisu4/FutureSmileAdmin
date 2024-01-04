@@ -12,7 +12,7 @@ const [input,setInput] = useState()
 const [errors, setErrors] = useState()
 const navigate = useNavigate();
 
-
+localStorage.clear()
 const handleSubmit = (e) => {
   e.preventDefault()
 
@@ -30,7 +30,7 @@ const handleSubmit = (e) => {
  
   // const config = {
   //   headers: {
-  //     "Content-Type": "multipart/form-data"
+  //     "Content-Type": 'application/json' ,
   //   }
   // }
   
@@ -46,29 +46,41 @@ const handleSubmit = (e) => {
   axios.post(`${baseURL}/admin/login`,input)
     .then((response) => {
       //$("#submitGalleryBtn").attr("disabled", false).text("Submit")
-      console.log(response)
-
+      console.log('with token',response.data.token)
+      // if(response.data.flag == -1){
+      //   toast.error(response.data.flag == -1, {
+      //     position: toast.POSITION.TOP_RIGHT,
+      //     autoClose: 2500,
+      //     theme: "dark",
+      //   }) 
+      // }
+   
       if (response.data.status === 1) {
+        localStorage.setItem('adminToken',response.data.token)
         toast.success(response.data.message, {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 2500,
           theme: "dark",
-        });navigate('/adminhome')
+        });
+        navigate('/adminhome')
         //$("#submitGalleryForm").trigger("reset")
       } else {
-        toast.error(response.data.status === 0, {
+        toast.error(response.data.status === 0,{
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 2500,
           theme: "dark",
-        });navigate('/')
+        })
       }
     }).catch((error) => {
       //$("#submitGalleryBtn").attr("disabled", false).text("Submit")
+     
       if (!error?.response) {
         toast.error(`No response from server.`, { position: toast.POSITION.TOP_RIGHT, autoClose: 2000, theme: "dark" })
       } else if (error.response?.status === 404) {
         toast.error("Not found.", { position: toast.POSITION.TOP_RIGHT, autoClose: 2000, theme: "dark" });
-      } else if (error.response?.status === 500) {
+      }else if (error.response?.status === 404) {
+        toast.error("Please Login", { position: toast.POSITION.TOP_RIGHT, autoClose: 2000, theme: "dark" });
+      } else if (error.response?.status === 401) {
         toast.error("Internal server error", { position: toast.POSITION.TOP_RIGHT, autoClose: 2000, theme: "dark" })
       } else if (error.response?.status === 400) {
         toast.error("Bad Credentials", { position: toast.POSITION.TOP_RIGHT, autoClose: 2000, theme: "dark" })
