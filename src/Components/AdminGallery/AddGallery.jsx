@@ -45,7 +45,7 @@ function AddGallery() {
     //   }
     // }
    
-    const baseURL = 'http://localhost:1803'
+    const baseURL = 'http://localhost:1804'
 
     axios.post(`${baseURL}/admin/gallery/creategallery`,formData,config)
       .then((response) => {

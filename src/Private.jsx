@@ -4,20 +4,20 @@ import axios from 'axios'
 
 
 const Private = ({ Component }) => {
-  const baseURL = 'http://localhost:1803'
+  const baseURL = 'http://localhost:1804'
 
   const token = localStorage.getItem('adminToken')
   const navigate = useNavigate()
 
   const logout = () => {
-    console.log('from private route', token);
+    //console.log('from private route', token);
     // if(token){  
     axios.post(`${baseURL}/admin/verifytoken`, token)
       .then((res) => {
-        console.log('res', res);
+        //console.log('res', res);
       }).catch((err) => {
-        console.log('err', err);
-        if (err.response.data.flag === 0 || err.response.data.flag === -1) {
+        //console.log('err', err);
+        if (err.response.data.flag === 0 || err.response.data.flag === -1 ) {
           navigate('/')
         }
         //  else{

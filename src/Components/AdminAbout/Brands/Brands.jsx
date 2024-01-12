@@ -14,7 +14,7 @@ function Brands() {
  const [currentPage,setCurrentPage] = useState(1)
  const [searchItem, setSearchItem] = useState()
 
-  const baseURL  =  'http://localhost:1803'
+  const baseURL  =  'http://localhost:1804'
 
   const handleInputChange = (e) => {
     setSearchItem(e.target.value.trim())

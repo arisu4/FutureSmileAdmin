@@ -18,7 +18,7 @@ function AddFaq() {
       $("#solutionsError").text("")
     
       console.log("input", input)
-      const baseURL = 'http://localhost:1803'
+      const baseURL = 'http://localhost:1804'
   
       axios.post(`${baseURL}/admin/home/createfaq`, input)
         .then((response) => {
