@@ -1,47 +1,31 @@
-//import React from 'react'
 import React, { useState, useEffect } from 'react'
-//import {Link} from  'react-router-dom'
 import axios from 'axios'
-//import { $ } from 'react-jquery-plugin'
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ReactPaginate from 'react-paginate';
-//import { toast } from "react-toastify";
-//import { useNavigate } from "react-router-dom";
-
-//import DataTable from 'datatables.net';
-//import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'jquery/dist/jquery.min.js';
-// import $ from 'jquery'; 
 
 function Permissions() {
   const [permissions, setPermissions] = useState([])
-  const [input, setInput] = useState({})
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [searchItem, setSearchItem] = useState()
 
-  
-  const [checked, setChecked] = useState([]);
-
-  //const navigate = useNavigate();
 
   const baseURL = 'http://localhost:1804'
-
 
   const handleInputChange = (e) => {
     setSearchItem(e.target.value.trim())
   }
 
 
-
-
   const fetchModules = async (page,term) => {
 
     await axios.get(`${baseURL}/admin/permission?page=${page}&pageSize=21&search=${term}`)
       .then(response => {
+        //console.log('response', response.data.PermissionData.data);
+        //setPermissions(response.data.PermissionData.data)
         const { permissions, totalPages } = response.data;
-        setPermissions(permissions);
+         setPermissions(permissions);
         setTotalPages(totalPages);
+         console.log('permissions', permissions);
       })
       .catch(error => {
         console.log(error)
@@ -50,135 +34,80 @@ function Permissions() {
   }
 
 
-
-
-  // const handleChange = (e,id,role_id,module_id,sub_module_id) => {
-  //   {e.target.value == 'on' ? setChecked(false):setChecked(true)}
-    
-  //   console.log('e.target.name',e.target.name,"e.target.value", e.target.value);
-  //   //e.preventDefault()
-  //   const obj={
-  //     id:id,
-  //     role_id:role_id,
-  //     module_id:module_id,
-  //     sub_module_id:sub_module_id
-  //   }
-  //   setInput({ ...input,obj,[e.target.name]: e.target.value })
-  // }
-
-  // console.log("input details",input)
-
-
-
   useEffect(() => {
     fetchModules(currentPage, searchItem);
   }, [currentPage, searchItem]);
 
 
-
-  // const items = [];
-
-  // let num = 1
-  // for (const datas of permissions) {
-
-  //   items.push(
-  //     <tr key={datas.id}>
-  //       <td>{num++}</td>
-  //       <td>{datas.role_id}</td>
-  //       <td>{datas.module_id}</td>
-  //       <td>{datas.sub_module_id}</td>
-  //       {datas.module_access === 1 || checked == true?
-  //         <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="module_access"  checked/></td> :
-  //         checked == false ? <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="module_access"  /></td>: null}
-
-  //       {datas.sub_module_access == 1 ?
-  //       <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="sub_module_access" value='1' checked /></td>:
-  //       <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="sub_module_access" value='0' /></td>}
-
-  //       {datas.access_item == 1 ?
-  //       <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="acess_item" value='1' checked /></td>:
-  //       <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="access_item" value='0' /></td>}
-       
-  //      {datas.details_item == 1 ?
-  //       <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="details_item" value='1' checked /></td>:
-  //       <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="details_item" value='0' /></td>}
-       
- 
-  //       {datas.add_item == 1 ?
-  //         <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="add_item" value='1' checked /></td> :
-  //         <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="add_item" value='0' /></td>}
-
-  //       {datas.edit_item == 1 ?
-  //         <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="edit_item" value='1' checked /></td> :
-  //         <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="edit_item" value='0' /></td>}
-
-  //      {datas.delete_item == 1 ?
-  //         <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="delete_item" value='1' checked /></td> :
-  //         <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="delete_item" value='0' /></td>}
-
-  //        {datas.status_item == 1 ?
-  //         <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="status_item" value='1' checked /></td> :
-  //         <td><input type="checkbox" onChange={(e)=>handleChange(e,datas.id,datas.role_id,datas.module_id,datas.sub_module_id)} name="status_item" value='0' /></td>}
- 
-  //     </tr>
-  //   )
-  // }
-  const handleSubmit = async(e) => {
-    // console.log("input",input)
-    console.log("checked",checked)
-    e.preventDefault()
-    const baseURL = 'http://localhost:1804'
-   await axios.post(`${baseURL}/admin/updatepermission`,checked)
-    .then(response=>{
-      console.log(response);
-    })
-  
-  }
-
-  const handleChange =(event)=>{
-    const {value,checked,name,id} = event.target
-    console.log('checked',checked);
-    const obj={
-      id:id,
-      name:name,
-      value:value
+  const handleChange = (e, id, index, value) => {
+    for (let x of permissions) {
+      if (x.id == id) {
+        if (e.target.name === 'module_access') {
+          console.log('yes');
+          if (value == 1) {
+            permissions[index].module_access = 0
+            return setPermissions([...permissions])
+          }
+          else if (value == 0) {
+            permissions[index].module_access = 1
+            return setPermissions([...permissions])
+          }
+        }
+        else if(e.target.name === 'sub_module_access'){
+          if (value == 1) {
+            permissions[index].sub_module_access = 0
+            return setPermissions([...permissions])
+          }
+          else if (value == 0) {
+            permissions[index].sub_module_access = 1
+            return setPermissions([...permissions])
+          }
+        }
+       else if(e.target.name == 'details_item'){
+        if (value == 1) {
+          permissions[index].details_item = 0
+          return setPermissions([...permissions])
+        }
+        else if (value == 0) {
+          permissions[index].details_item = 1
+          return setPermissions([...permissions])
+        }
+       }
+       else if(e.target.name == 'add_item'){
+        if (value == 1) {
+          permissions[index].add_item = 0
+          return setPermissions([...permissions])
+        }
+        else if (value == 0) {
+          permissions[index].add_item = 1
+          return setPermissions([...permissions])
+        }
+       }
+       else if(e.target.name == 'delete_item'){
+        if (value == 1) {
+          permissions[index].delete_item = 0
+          return setPermissions([...permissions])
+        }
+        else if (value == 0) {
+          permissions[index].delete_item = 1
+          return setPermissions([...permissions])
+        }
+       }
+      }
     }
-    if(checked){
-      setChecked(pre=>[...pre,obj])
-    }else(
-      setChecked(pre=>{
-        return[...pre.filter(skill => skill === name)]
-      })
-    )
- }
- 
 
-  const items = [];
-
-  let num = 1
-  for (const datas of permissions) {
-
-    items.push(
-      <tr key={datas.id}>
-        <td>{num++}</td>
-        <td>{datas.role_id}</td>
-        <td>{datas.module_id}</td>
-        <td>{datas.sub_module_id}</td>
-      
-        <td><input type="checkbox" value="1" id={datas.id} onChange={handleChange}  name="module_access"  checked = {datas.module_access == 1}/></td>
-        <td><input type="checkbox" value="1" id={datas.id}onChange={handleChange}  name="sub_module_access"  /></td>
-        <td><input type="checkbox" value="1" id={datas.id} onChange={handleChange}  name="access_item"  /></td>
-        <td><input type="checkbox" value="1"id={datas.id}onChange={handleChange}  name="add_item"  /></td>
-        <td><input type="checkbox" value="1" id={datas.id} onChange={handleChange}  name="edit_item"  /></td>
-        <td><input type="checkbox" value="1" id={datas.id} onChange={handleChange}  name="details_item"  /></td>
-        <td><input type="checkbox" value="1"  id={datas.id} onChange={handleChange}  name="delete_item"  /></td>
-        <td><input type="checkbox" value="1"  id={datas.id} onChange={handleChange}  name="status_item"  /></td>
-      </tr>
-    )
   }
 
-
-
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('permissions after', permissions);
+    axios.post(`${baseURL}/admin/updatepermission`, permissions)
+      .then((response) => {
+        console.log('response after', response);
+      }).catch((err) => {
+        console.log('err', err);
+      })
+  }
   const handlePageChange = ({ selected: selectedPage }) => {
     setCurrentPage(selectedPage + 1)
   }
@@ -215,7 +144,7 @@ function Permissions() {
                     <h3 className="card-title">Permission access</h3>
                     {/* <Link className='btn btn-info' to="/addtestimonials" style={{ float: 'right' }}>Add Roles</Link>  */}
                   </div>
-                  <form onSubmit={handleSubmit} >
+                  <form onSubmit={(e) => handleSubmit(e)}>
 
                     <div className="input-group input-group-sm container mt-3 w-25 mr-5 " id="searchform">
                       <div className="input-group-prepend">
@@ -223,64 +152,75 @@ function Permissions() {
                       </div>
                       <input id="searchinput" type="text" placeholder="Type to Search..." onChange={handleInputChange} className="form-control" />
                     </div>
+                    {/* /.card-header */}
                     <div className="card-body">
-                    <table id="example2" className="table table-bordered table-striped">
-                      <thead>
-                        <tr>
-                          <th>Sl no</th>
-                          <th>Role_id</th>
-                          <th>Module_id</th>
-                          <th>Sub_module_id</th>
-                          <th>Module_access</th>
-                          <th>Sub_Module_access</th>
-                          <th>Access_item</th>
-                          <th>Add_item</th>
-                          <th>Edit_Item</th>
-                          <th>Details_item</th>
-                          <th>Delete_Item</th>
-                          <th>Status_item</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {items}
-                      </tbody>
+                      <table id="example2" className="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Sl no</th>
+                            <th>Role_id</th>
+                            <th>Module_id</th>
+                            <th>Sub_module_id</th>
+                            <th>Module_access</th>
+                            <th>Sub_Module_access</th>
+                            <th>Details_item</th>
+                            <th>Add_item</th>
+                            <th>Edit_Item</th>
+                            <th>Delete_Item</th>
+                            {/* <th>Status_item</th> */}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {permissions &&
+                            permissions.map((datas, index) => (
+                              <tr key={datas.id}>
+                                <td>{index + 1}</td>
+                                <td>{datas.role_id}</td>
+                                <td>{datas.module_id}</td>
+                                <td>{datas.sub_module_id}</td>
+                                <td><input type="checkbox" checked={datas.module_access == 1} name="module_access" onChange={(e) => handleChange(e, datas.id, index, datas.module_access)}  /></td>
+                                <td><input type="checkbox" checked={datas.sub_module_access == 1} name="sub_module_access" onChange={(e) => handleChange(e, datas.id, index, datas.sub_module_access)} /></td>
+                                <td><input type="checkbox" checked={datas.details_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.details_item )} name="details_item" /></td>
+                                <td><input type="checkbox" checked={datas.add_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.add_item )} name="add_item" /></td>
+                                <td><input type="checkbox" checked={datas.edit_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.edit_item )} name="edit_item" /></td>
+                                <td><input type="checkbox" checked={datas.delete_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.delete_item)} name="delete_item" /></td>
+                                {/* <td>{datas.status == 1 ? 'Unlocked' : datas.status == 0 ? 'Locked' : null}</td> */}
+                              </tr>
 
-                    </table>
-
-                  </div>
-                  <button type="submit" className="btn btn-info" style={{ float: 'left' }}>Submit</button>
+                            ))}
+                        </tbody>
+                      </table>
+                      <br />
+                      <button className='btn btn-primary'>Submit</button>
+                    </div>
                   </form>
-                  {/* /.card-header */}
-                 
-
                   {/* /.card-body */}
                 </div>
-                
                 {/* /.card */}
                 {/* <a className='btn btn-primary' >Submit</a> */}
                 <div className='float-right'>
-                  <ReactPaginate
-                    breakLabel="..."
-                    onPageChange={handlePageChange}
-                    initialPage={0}
-                    //forcePage ={currentPage}
-                    //pageRangeDisplayed={5}
-                    pageCount={totalPages}
-                    previousLabel="<<Previous"
-                    nextLabel="Next>>"
-                    renderOnZeroPageCount={null}
-                    activeClassName={"active"}
+                   <ReactPaginate
+                     breakLabel="..."
+                     onPageChange={handlePageChange}
+                     initialPage={0}
+                     //forcePage ={currentPage}
+                     //pageRangeDisplayed={5}
+                     pageCount={totalPages}
+                     previousLabel="<<Previous"
+                     nextLabel="Next>>"
+                     renderOnZeroPageCount={null}
+                     activeClassName={"active"}
                     breakClassName={'page-item'}
                     breakLinkClassName={'page-link'}
-                    containerClassName={'pagination'}
-                    pageClassName={'page-item'}
-                    pageLinkClassName={'page-link'}
-                    previousClassName={'page-item'}
-                    previousLinkClassName={'page-link'}
-                    nextClassName={'page-item'}
+                     containerClassName={'pagination'}
+                     pageClassName={'page-item'}
+                     pageLinkClassName={'page-link'}
+                     previousClassName={'page-item'}
+                     previousLinkClassName={'page-link'}
+                     nextClassName={'page-item'}
                     nextLinkClassName={'page-link'}
-                  />
-                </div>
+                />
+              </div>
               </div>
               {/* /.col */}
             </div>
