@@ -43,7 +43,7 @@ function Permissions() {
     for (let x of permissions) {
       if (x.id == id) {
         if (e.target.name === 'module_access') {
-          console.log('yes');
+          //console.log('yes');
           if (value == 1) {
             permissions[index].module_access = 0
             return setPermissions([...permissions])
@@ -63,16 +63,16 @@ function Permissions() {
             return setPermissions([...permissions])
           }
         }
-       else if(e.target.name == 'details_item'){
-        if (value == 1) {
-          permissions[index].details_item = 0
-          return setPermissions([...permissions])
-        }
-        else if (value == 0) {
-          permissions[index].details_item = 1
-          return setPermissions([...permissions])
-        }
-       }
+        else if(e.target.name == 'access_item'){
+          if (value == 1) {
+            permissions[index].access_item = 0
+            return setPermissions([...permissions])
+          }
+          else if (value == 0) {
+            permissions[index].access_item = 1
+            return setPermissions([...permissions])
+          }
+         }
        else if(e.target.name == 'add_item'){
         if (value == 1) {
           permissions[index].add_item = 0
@@ -93,10 +93,21 @@ function Permissions() {
           return setPermissions([...permissions])
         }
        }
+       else if(e.target.name == 'status_item'){
+        if (value == 1) {
+          permissions[index].status_item = 0
+          return setPermissions([...permissions])
+        }
+        else if (value == 0) {
+          permissions[index].status_item = 1
+          return setPermissions([...permissions])
+        }
+       }
       }
     }
 
   }
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -108,6 +119,7 @@ function Permissions() {
         console.log('err', err);
       })
   }
+
   const handlePageChange = ({ selected: selectedPage }) => {
     setCurrentPage(selectedPage + 1)
   }
@@ -163,11 +175,12 @@ function Permissions() {
                             <th>Sub_module_id</th>
                             <th>Module_access</th>
                             <th>Sub_Module_access</th>
+                            <th>Access_item</th>
                             <th>Details_item</th>
                             <th>Add_item</th>
                             <th>Edit_Item</th>
                             <th>Delete_Item</th>
-                            {/* <th>Status_item</th> */}
+                            <th>Status_item</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -178,13 +191,14 @@ function Permissions() {
                                 <td>{datas.role_id}</td>
                                 <td>{datas.module_id}</td>
                                 <td>{datas.sub_module_id}</td>
-                                <td><input type="checkbox" checked={datas.module_access == 1} name="module_access" onChange={(e) => handleChange(e, datas.id, index, datas.module_access)}  /></td>
-                                <td><input type="checkbox" checked={datas.sub_module_access == 1} name="sub_module_access" onChange={(e) => handleChange(e, datas.id, index, datas.sub_module_access)} /></td>
+                                <td><input type="checkbox" checked={datas.module_access == 1} onChange={(e) => handleChange(e, datas.id, index, datas.module_access)} name="module_access"   /></td>
+                                <td><input type="checkbox" checked={datas.sub_module_access == 1}  onChange={(e) => handleChange(e, datas.id, index, datas.sub_module_access)} name="sub_module_access"  /></td>
                                 <td><input type="checkbox" checked={datas.details_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.details_item )} name="details_item" /></td>
+                                <td><input type="checkbox" checked={datas.access_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.access_item )} name="access_item" /></td>
                                 <td><input type="checkbox" checked={datas.add_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.add_item )} name="add_item" /></td>
                                 <td><input type="checkbox" checked={datas.edit_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.edit_item )} name="edit_item" /></td>
                                 <td><input type="checkbox" checked={datas.delete_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.delete_item)} name="delete_item" /></td>
-                                {/* <td>{datas.status == 1 ? 'Unlocked' : datas.status == 0 ? 'Locked' : null}</td> */}
+                                <td><input type="checkbox" checked={datas.status_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.status_item )} name="status_item" /></td> 
                               </tr>
 
                             ))}
