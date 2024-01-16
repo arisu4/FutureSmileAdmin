@@ -117,6 +117,7 @@ function Permissions() {
         console.log('response after', response);
       }).catch((err) => {
         console.log('err', err);
+       
       })
   }
 
