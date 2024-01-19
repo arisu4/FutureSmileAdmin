@@ -53,6 +53,7 @@ function Roles() {
     console.log(`roles called`);
    await axios.post(`${baseURL}/admin/roles?page=${page}&pageSize=2&search=${term}`)
     .then(response=>{
+      console.log("roles page",response)
        const {roles,totalPages} = response.data;
         setRoles(roles);
         setTotalPages(totalPages);
@@ -80,10 +81,10 @@ const items = [];
       items.push(
       <tr key={datas.id}>
           <td>{num++}</td>
-          <td>{datas.role}</td>
+          <td>{datas.roles}</td>
           <td>{datas.role_description}</td>
           <td>{datas.adminType}</td>
-          <td>{datas.user_id}</td>
+         
           {/* <td>{datas.status == 1 ? 'Unlocked' : datas.status == 0 ? 'Locked' : null}</td> */}
           <td>
          <Link to={`/permissions`}><FontAwesomeIcon title="Edit" icon="fa-solid fa-pen-to-square" /></Link> &nbsp;
@@ -164,7 +165,6 @@ const handlePageChange = ({selected:selectedPage})=>{
                           <th>Roles</th>
                           <th>Description</th>
                           <th>Type</th>
-                          <th>User_Id</th>
                           <th>Actions</th>
                         </tr>
                       </thead>

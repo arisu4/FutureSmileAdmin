@@ -49,7 +49,10 @@ import AddStory from '../Components/AdminAbout/OurStory/AddStory';
 import Roles  from '../Components/Roles&Permissions/Roles'
 import Permissions  from '../Components/Roles&Permissions/Permissions'
 
-import Users from '../Components/Users/Users'
+import Admin from '../Components/Admin/Admin'
+import AddAdmin from '../Components/Admin/AddAdmin'
+
+import User from '../Components/Admin/User'
 import EditFaq from '../Components/AdminHome/Faq/EditFaq';
 import Private from '../Private';
 
@@ -121,7 +124,10 @@ function AdminRoutes() {
         <Route path="/editcontact/:id" element={<Private Component={EditContact}/>} />
        
 
-        <Route path="/users" element={<Private Component={Users}/>} />
+        <Route path="/admins" element={<Private Component={Admin}/>} />
+        <Route path="/addadmin" element={<Private Component={AddAdmin}/>} />
+
+        <Route path="/users" element={<Private Component={User}/>} />
         
         <Route path="/roles" element={<Private Component={Roles}/>} />
         <Route path="/permissions" element={<Private Component={Permissions}/>} />

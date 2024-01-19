@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+//import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -7,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function Sidebar() {
   const [modules, setModules] = useState([])
   const [submodules, setSubmodules] = useState([])
-  let { id } = useParams()
+  //let { id } = useParams()
 
   const baseURL = 'http://localhost:1804'
 
@@ -69,10 +70,10 @@ function Sidebar() {
                 <ul className="nav nav-treeview">
                   {submodules.map(submodules => (
                     <li className="nav-item" key={submodules.id}>
-                      <a href={submodules.link} className="nav-link active">
+                      <Link to={submodules.link} className="nav-link active">
                         <i className="far fa-circle nav-icon"></i>
                         <p>{submodules.sub_module_name}</p>
-                      </a>
+                      </Link>
                     </li>
                   )
                   )}

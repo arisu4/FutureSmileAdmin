@@ -1,5 +1,5 @@
 //import React from 'react'
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import axios from 'axios'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -63,13 +63,15 @@ function AddTestmonial() {
         } else if (error.response?.status === 420 && error.response.data) {
           toast.error("Validation error.", { position: toast.POSITION.TOP_RIGHT, autoClose: 2000, theme: "dark" })
           const responseErrors = error.response.data.errors
+          console.log("test errors",responseErrors );
           if (responseErrors) {
+           
             const errorData = {}
 
             for (var errorItem of responseErrors) {
-
+              console.log('erroritem',errorItem);
               if (errorItem.path === "name" && (errorData.name === "" || errorData.name === undefined)) {
-
+                  console.log('erroritem inside',errorItem);
                 errorData[errorItem.path] = errorItem.msg
               } else if (errorItem.path === "designation" && (errorData.designation === "" || errorData.designation === undefined)) {
                 errorData[errorItem.path] = errorItem.msg
@@ -78,6 +80,7 @@ function AddTestmonial() {
                 errorData[errorItem.path] = errorItem.msg
               }
               setErrors(errorData)
+              
             }
           }
         } else if (error?.code) {
@@ -91,6 +94,8 @@ function AddTestmonial() {
   const textHandle = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value })
   }
+
+ 
   return (
     <>
       <div className="content-wrapper">

@@ -72,6 +72,15 @@ function Permissions() {
             permissions[index].access_item = 1
             return setPermissions([...permissions])
           }
+         } else if(e.target.name == 'details_item'){
+          if (value == 1) {
+            permissions[index].details_item = 0
+            return setPermissions([...permissions])
+          }
+          else if (value == 0) {
+            permissions[index].details_item = 1
+            return setPermissions([...permissions])
+          }
          }
        else if(e.target.name == 'add_item'){
         if (value == 1) {
@@ -80,6 +89,15 @@ function Permissions() {
         }
         else if (value == 0) {
           permissions[index].add_item = 1
+          return setPermissions([...permissions])
+        }
+       } else if(e.target.name == 'edit_item'){
+        if (value == 1) {
+          permissions[index].edit_item = 0
+          return setPermissions([...permissions])
+        }
+        else if (value == 0) {
+          permissions[index].edit_item = 1
           return setPermissions([...permissions])
         }
        }
@@ -167,7 +185,7 @@ function Permissions() {
                     </div>
                     {/* /.card-header */}
                     <div className="card-body">
-                      <table id="example2" className="table table-bordered table-striped">
+                      <table id="example2" className="table table-bordered table-striped table-responsive">
                         <thead>
                           <tr>
                             <th>Sl no</th>
@@ -194,8 +212,8 @@ function Permissions() {
                                 <td>{datas.sub_module_id}</td>
                                 <td><input type="checkbox" checked={datas.module_access == 1} onChange={(e) => handleChange(e, datas.id, index, datas.module_access)} name="module_access"   /></td>
                                 <td><input type="checkbox" checked={datas.sub_module_access == 1}  onChange={(e) => handleChange(e, datas.id, index, datas.sub_module_access)} name="sub_module_access"  /></td>
-                                <td><input type="checkbox" checked={datas.details_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.details_item )} name="details_item" /></td>
                                 <td><input type="checkbox" checked={datas.access_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.access_item )} name="access_item" /></td>
+                                <td><input type="checkbox" checked={datas.details_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.details_item )} name="details_item" /></td>
                                 <td><input type="checkbox" checked={datas.add_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.add_item )} name="add_item" /></td>
                                 <td><input type="checkbox" checked={datas.edit_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.edit_item )} name="edit_item" /></td>
                                 <td><input type="checkbox" checked={datas.delete_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.delete_item)} name="delete_item" /></td>
