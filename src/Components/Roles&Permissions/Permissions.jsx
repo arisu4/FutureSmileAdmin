@@ -189,17 +189,17 @@ function Permissions() {
                         <thead>
                           <tr>
                             <th>Sl no</th>
-                            <th>Role_id</th>
-                            <th>Module_id</th>
-                            <th>Sub_module_id</th>
-                            <th>Module_access</th>
-                            <th>Sub_Module_access</th>
-                            <th>Access_item</th>
-                            <th>Details_item</th>
-                            <th>Add_item</th>
-                            <th>Edit_Item</th>
-                            <th>Delete_Item</th>
-                            <th>Status_item</th>
+                            <th>Role Id</th>
+                            <th>Module Id</th>
+                            <th>Sub module Id</th>
+                            <th>Module access</th>
+                            <th>Sub Module access</th>
+                            <th>Access item</th>
+                            <th>Details item</th>
+                            <th>Add item</th>
+                            <th>Edit item</th>
+                            <th>Delete item</th>
+                            <th>Status item</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -207,9 +207,9 @@ function Permissions() {
                             permissions.map((datas, index) => (
                               <tr key={datas.id}>
                                 <td>{index + 1}</td>
-                                <td>{datas.role_id}</td>
-                                <td>{datas.module_id}</td>
-                                <td>{datas.sub_module_id}</td>
+                                <td>{datas.roleId}</td>
+                                <td>{datas.moduleId}</td>
+                                <td>{datas.subModuleId}</td>
                                 <td><input type="checkbox" checked={datas.module_access == 1} onChange={(e) => handleChange(e, datas.id, index, datas.module_access)} name="module_access"   /></td>
                                 <td><input type="checkbox" checked={datas.sub_module_access == 1}  onChange={(e) => handleChange(e, datas.id, index, datas.sub_module_access)} name="sub_module_access"  /></td>
                                 <td><input type="checkbox" checked={datas.access_item == 1} onChange={(e) => handleChange(e, datas.id, index, datas.access_item )} name="access_item" /></td>

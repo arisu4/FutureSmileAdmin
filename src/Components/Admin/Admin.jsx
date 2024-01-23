@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-//import {Link} from  'react-router-dom'
+import {Link} from  'react-router-dom'
 import axios from 'axios'
-
-// { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ReactPaginate from 'react-paginate';
-import Select, { components } from 'react-select';
+//import Select from 'react-select';
+
 
 function Admin() {
   const [admins,setAdmins] = useState([])
@@ -12,14 +12,15 @@ function Admin() {
   const [currentPage,setCurrentPage] = useState(1)
   const [searchItem, setSearchItem] = useState()
  
- 
    const baseURL  =  'http://localhost:1804'
  
    const handleInputChange = (e) => {
      setSearchItem(e.target.value.trim())
    }
+
+  
  
-   
+  
    const fetchAdmins= async(page,term) => {
      console.log(`roles called`);
     await axios.post(`${baseURL}/admin/credential?page=${page}&pageSize=3&search=${term}`)
@@ -43,36 +44,35 @@ function Admin() {
  
  
    
-//  const items = [];
+ const items = [];
  
-//    let num = 1
-//    for (const datas of admins) {
+   let num = 1
+   for (const datas of admins) {
  
-//        items.push(
-//        <tr key={datas.id}>
-//            <td>{num++}</td>
-//            <td>{datas.name}</td>
-//            <td>{datas.email}</td>
-//            <td>{datas.phone}</td>
-//            <td>{datas.username}</td>
-//            <td>{datas.password}</td>
-//            <td>{datas.profilePic}</td>
-//            <td>{datas.roles}</td>
-//            <td>{datas.roleId}</td>
-//            <td>{datas.adminType}</td>
-//            <td>{datas.countryId}</td>
-//            <td>{datas.status}</td>
-//            {/* <td>{datas.status == 1 ? 'Unlocked' : datas.status == 0 ? 'Locked' : null}</td> */}
-//            <td>
-     
-//          </td>
+       items.push(
+       <tr key={datas.id}>
+           <td>{num++}</td>
+           <td>{datas.name}</td>
+           <td>{datas.email}</td>
+           <td>{datas.phone}</td>
+           <td>{datas.username}</td>
+           <td>{datas.password}</td>
+           <td>{datas.profilePic}</td>
+           <td>{datas.roles}</td>
+           <td>{datas.roleId}</td>
+           <td>{datas.adminType}</td>
+           <td>{datas.countryId}</td>
+           <td>{datas.status}</td>
+           {/* <td>{datas.status == 1 ? 'Unlocked' : datas.status == 0 ? 'Locked' : null}</td> */}
+            <td>
+             <Link to={`/editadmin/${datas.id}`}><FontAwesomeIcon title="Edit" icon="fa-solid fa-pen-to-square" /></Link> &nbsp;
+          </td>
           
-//        </tr>
-//        )
-//    }
+       </tr>
+       )
+    }
  
 
-  
  const handlePageChange = ({selected:selectedPage})=>{
    setCurrentPage(selectedPage+1)
    
@@ -136,28 +136,11 @@ function Admin() {
                       <th>Admin Type</th>
                       <th>Country Id</th>
                       <th>Status</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                  {admins &&
-                            admins.map((datas, index) => (
-                              <tr key={datas.id}>
-                                <td>{index + 1}</td>
-                                <td>{datas.name}</td>
-                                <td>{datas.email}</td>
-                                <td>{datas.phone}</td>
-                                <td>{datas.username}</td>
-                                <td>{datas.password}</td>
-                                <td>{datas.profilePic}</td>
-                                <td>{datas.roles}</td>
-                                <td>{datas.roleId}</td>
-                                <td>{datas.adminType}</td>
-                                <td>{datas.countryId}</td>
-                                <td>{datas.status}</td>
-                               
-                              </tr>
-
-                            ))}
+                  {items}
                   </tbody>
                
                 </table>

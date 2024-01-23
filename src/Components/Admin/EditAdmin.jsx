@@ -3,11 +3,13 @@ import axios from 'axios'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery"
+import { useParams } from 'react-router-dom';
 //import { Link } from 'react-router-dom'
 import Select from 'react-select';
 
 function AddAdmin() {
-    const [input, setInput] = useState({});
+    // const [input, setInput] = useState({});
+    const [edit, setEdit] = useState([]) 
     const [image, setImage] = useState({});
     const [options,setOptions]= useState([])
     const [selectedId, setSelectedId] = useState();
@@ -21,7 +23,7 @@ function AddAdmin() {
     //   });
      //const [picteam, setPicteam] = useState({})
     const [errors, setErrors] = useState([])
-
+    const { id } = useParams()
    
 
     const handleSubmit = (e) => {
@@ -49,16 +51,16 @@ function AddAdmin() {
 
 
         var formData = new FormData()
-        formData.append("name", input.name)
-        formData.append("email", input.email)
-        formData.append("phone", input.phone)
-        formData.append("username", input.username)
-        formData.append("password", input.password)
+        formData.append("name", edit.name)
+        formData.append("email", edit.email)
+        formData.append("phone", edit.phone)
+        formData.append("username", edit.username)
+        formData.append("password", edit.password)
         formData.append("image", image)
-        formData.append("roles", input.roles)
+        formData.append("roles", edit.roles)
         formData.append("roleId", selectedId)
         formData.append("adminType", selectedType)
-        formData.append("countryId", input.countryId)
+        formData.append("countryId", edit.countryId)
       
         //formdata.append('picteam', picteam)
 
@@ -77,7 +79,7 @@ function AddAdmin() {
 
         const baseURL = 'http://localhost:1804'
 
-        axios.post(`${baseURL}/admin/create`, formData,config)
+        axios.post(`${baseURL}/admin/update`, formData,config)
             .then((response) => {
                 $("#submitAdminBtn").attr("disabled", false).text("Submit")
                 //console.log(response)
@@ -160,7 +162,7 @@ function AddAdmin() {
 
     const textHandle = (e) => {
         
-        setInput({ ...input, [e.target.name]: e.target.value })
+        setEdit({ ...edit, [e.target.name]: e.target.value })
         //{selectedValue && setInput((prev)=>({...prev,adminType:selectedValue.adminType,rolesId:selectedValue.id}))}
         //console.log("input",input);
     }
@@ -202,10 +204,24 @@ function AddAdmin() {
         })
       
     }
+ 
+    const getAdminbyId = async() => {
+        const baseURL = 'http://localhost:1804'
+        await axios.get(`${baseURL}/admin/editadmin/${id}`)
+            .then(response => {
+                console.log("edit admin",response.data);
+                const { editadmins } = response.data;
+                setEdit(editadmins);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
 
     useEffect(() => {
-        fetchTypes(); 
+        fetchTypes();
+        getAdminbyId(); 
       }, []); 
 
     //   useEffect(() => {
@@ -226,7 +242,7 @@ function AddAdmin() {
                 <div className="container-fluid">
                     <div className="row mb-2">
                         <div className="col-sm-6">
-                            <h1>Admin</h1>
+                            <h1>Edit Admin Details</h1>
                         </div>
                         <div className="col-sm-6">
                             <ol className="breadcrumb float-sm-right">
@@ -239,7 +255,7 @@ function AddAdmin() {
             </section>
             <div className="card card-default">
                 <div className="card-header">
-                    <h3 className="card-title">Please Add Records</h3>
+                    <h3 className="card-title">Edit Records</h3>
                     <div className="card-tools">
                         <button type="button" className="btn btn-tool" data-card-widget="collapse">
                             <i className="fas fa-minus" />
@@ -259,7 +275,7 @@ function AddAdmin() {
                                 {/* text input */}
                                 <div className="form-group">
                                     <label>Name</label>
-                                    <input type="text" name="name" className="form-control" placeholder="Enter Name" onChange={textHandle} />
+                                    <input type="text" name="name" className="form-control" placeholder="Enter Name" onChange={textHandle} defaultValue={edit.name} />
                                     <span id="nameError"style={{ color: 'red', backgroundColor: '', fontSize: "14px" }}>{errors?.name}</span> 
                                 </div>
                             </div>
@@ -267,7 +283,7 @@ function AddAdmin() {
                             <div className="col-sm-6">
                                 <div className="form-group">
                                     <label>Email</label>
-                                    <input type="text" name="email" className="form-control" placeholder="Enter Email" onChange={textHandle} />
+                                    <input type="text" name="email" className="form-control" placeholder="Enter Email" onChange={textHandle}defaultValue={edit.email} />
                                      <span id="emailError"style={{ color: 'red', backgroundColor: '', fontSize: "14px" }}>{errors?.email}</span>
                                 </div>
                             </div>
@@ -277,40 +293,40 @@ function AddAdmin() {
                             <div className="col-sm-6">
                                 <div className="form-group">
                                     <label>Phone</label>
-                                    <input type="text" name="phone" className="form-control" placeholder="Enter Phone" onChange={textHandle} />
+                                    <input type="text" name="phone" className="form-control" placeholder="Enter Phone" onChange={textHandle} defaultValue={edit.phone}  />
                                     <span id="phoneError"style={{ color: 'red', backgroundColor: '', fontSize: "14px" }}>{errors?.phone}</span> 
                                 </div>
                             </div>
                             <div className="col-sm-6">
                                 <div className="form-group">
                                     <label>Username</label>
-                                    <input type="text" name="username" className="form-control" placeholder="Enter Usename" onChange={textHandle} />
+                                    <input type="text" name="username" className="form-control" placeholder="Enter Usename" onChange={textHandle} defaultValue={edit.username} />
                                     <span id="usernameError" style={{ color: 'red', backgroundColor: '', fontSize: "14px" }}>{errors?.username}</span>
                                 </div>
                             </div>
                         </div>
-
+{/* 
                         <div className="row">
                             <div className="col-sm-6">
                                 <div className="form-group">
                                     <label>Password</label>
-                                    <input type="text" name="password" className="form-control" placeholder="Enter Password" onChange={textHandle} />
+                                    <input type="text" name="password" className="form-control" placeholder="Enter Password" onChange={textHandle} defaultValue={edit.password}  />
                                     <span id="passwordError"style={{ color: 'red', backgroundColor: '', fontSize: "14px" }}>{errors?.password}</span>
                                 </div>
                             </div>
                             <div className="col-sm-6">
                                 <div className="form-group">
                                     <label>Image</label>
-                                    <input type="file" name="image" className="form-control" accept = "image/png,image/jpeg,image/jpg,image/webp" placeholder="Enter Image" onChange={imageHandle}/>
+                                    <input type="file" name="image" className="form-control" accept = "image/png,image/jpeg,image/jpg,image/webp" placeholder="Enter Image" onChange={imageHandle} defaultValue={edit.image} />
                                     <span id="imageError"style={{ color: 'red', backgroundColor: '', fontSize: "14px" }}>{errors?.image}</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="row">
                         <div className="col-sm-6">
                                 <div className="form-group">
                                     <label>Roles</label>
-                                    <input type="text" name="roles" className="form-control" placeholder="Provide role"  onChange={textHandle} />
+                                    <input type="text" name="roles" className="form-control" placeholder="Provide role"  onChange={textHandle} defaultValue={edit.roles}  />
                                     <span id="rolesError"style={{ color: 'red', backgroundColor: '', fontSize: "14px" }}>{errors?.roles}</span>
                                 </div>
                             </div>
@@ -318,7 +334,7 @@ function AddAdmin() {
                             <div className="col-sm-6">
                                 <div className="form-group">
                                     <label>RolesId</label>
-                                    <input type="integer" name="roleId" className="form-control" value={selectedId} placeholder="Role Id"  />
+                                    <input type="integer" name="roleId" className="form-control" value={selectedId} placeholder={edit.roleId}  />
                                     <span id="roleIdError"style={{ color: 'red', backgroundColor: '', fontSize: "14px" }}>{errors?.roleId}</span>
                                 </div>
                             </div>
@@ -328,11 +344,11 @@ function AddAdmin() {
                                 <div className="form-group">
                                     <label>Admin Type</label>
                                     <Select
-                                    //defaultValue={value}
+                                    //defaultValue={edit.adminType}
                                     name='adminType'
-                                    placeholder="Select type"
+                                    placeholder={edit.adminType}
                                     id="options.id"
-                                    //value={options.id}
+                                    value={options.id}
                                     onChange={handleChange}
                                     options={options}
                                     getOptionLabel={(options) => options['adminType']}
@@ -344,12 +360,12 @@ function AddAdmin() {
                             <div className="col-sm-6">
                                 <div className="form-group">
                                     <label>Country</label>
-                                    <input type="text" name="countryId" className="form-control" placeholder="Enter Country" onChange={textHandle} />
+                                    <input type="text" name="countryId" className="form-control" placeholder="Enter Country" onChange={textHandle} defaultValue={edit.countryId} />
                                     <span id="countryIdError"style={{ color: 'red', backgroundColor: '', fontSize: "14px" }}>{errors?.countryId}</span>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="submitAdminBtn" className="btn btn-info" style={{ float: 'right' }}>Submit</button>
+                        <button type="submit" id="submitAdminBtn" className="btn btn-info" style={{ float: 'right' }}>Update</button>
 
                     </form>
 

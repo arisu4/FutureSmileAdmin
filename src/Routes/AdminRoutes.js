@@ -51,6 +51,7 @@ import Permissions  from '../Components/Roles&Permissions/Permissions'
 
 import Admin from '../Components/Admin/Admin'
 import AddAdmin from '../Components/Admin/AddAdmin'
+import EditAdmin from '../Components/Admin/EditAdmin'
 
 import User from '../Components/Admin/User'
 import EditFaq from '../Components/AdminHome/Faq/EditFaq';
@@ -126,6 +127,8 @@ function AdminRoutes() {
 
         <Route path="/admins" element={<Private Component={Admin}/>} />
         <Route path="/addadmin" element={<Private Component={AddAdmin}/>} />
+        <Route path="/editadmin/:id" element={<Private Component={EditAdmin}/>} />
+
 
         <Route path="/users" element={<Private Component={User}/>} />
         
