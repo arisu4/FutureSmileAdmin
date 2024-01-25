@@ -12,6 +12,8 @@ function Sidebar() {
 
   const baseURL = 'http://localhost:1804'
 
+ 
+
   const fetchSidebar = () => {
     axios.get(`${baseURL}/admin/module`)
       .then(response => {
@@ -34,7 +36,7 @@ function Sidebar() {
     axios.get(`${baseURL}/admin/submodules/${id}`)
       .then(response => {
         const submodules = response.data;
-        //console.log(`sidebar submodules`, submodules)
+        console.log(`sidebar submodules`, submodules)
         setSubmodules(submodules);
       })
       .catch(error => {
