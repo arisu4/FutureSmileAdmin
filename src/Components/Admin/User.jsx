@@ -59,8 +59,6 @@ function Users() {
            <td>{num++}</td>
            <td>{datas.email}</td>
            <td>{datas.password}</td>
-           <td>{datas.roles}</td>
-           <td>{datas.roleId}</td>
            <td>{datas.status}</td>
            {/* <td>{datas.status == 1 ? 'Unlocked' : datas.status == 0 ? 'Locked' : null}</td> */}
            <td>
@@ -131,8 +129,7 @@ function Users() {
                       <th>Sl no</th>
                       <th>Email</th>
                       <th>Password</th>
-                      <th>Roles</th>
-                      <th>Role_id</th>
+
                       <th>Status</th>
                     </tr>
                   </thead>

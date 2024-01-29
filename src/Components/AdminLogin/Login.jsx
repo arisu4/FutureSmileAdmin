@@ -46,7 +46,8 @@ const handleSubmit = (e) => {
   axios.post(`${baseURL}/admin/login`,input)
     .then((response) => {
       //$("#submitGalleryBtn").attr("disabled", false).text("Submit")
-      console.log('with token',response.data.token)
+      //console.log('with adminId',response.data.roleId)
+      //console.log('with token',response.data.token)
       // if(response.data.flag == -1){
       //   toast.error(response.data.flag == -1, {
       //     position: toast.POSITION.TOP_RIGHT,
@@ -57,6 +58,7 @@ const handleSubmit = (e) => {
    
       if (response.data.status === 1) {
         localStorage.setItem('adminToken',response.data.token)
+        localStorage.setItem('adminId',response.data.roleId)
         toast.success(response.data.message, {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 2500,
