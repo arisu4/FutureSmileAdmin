@@ -150,7 +150,7 @@ function Sidebar() {
 
   const fetchSidebar = () => {
    
-    console.log("adminId sidebar",roleId);
+    //console.log("adminId sidebar",roleId);
 
     axios.get(`${baseURL}/admin/module`)
       .then(response => {
@@ -174,12 +174,14 @@ function Sidebar() {
 
 
 
-  const handleClick = (id) => {
-    //console.log("handle click ", id);
-    axios.get(`${baseURL}/admin/submodules/${id}`)
+  const handleClick = (id,roleid) => {
+    console.log("handle click ", id);
+    console.log("handle role ", roleId);
+    axios.get(`${baseURL}/admin/submodules/${id}/${roleId}`)
       .then(response => {
         const submodules = response.data;
-        console.log(`sidebar submodules`, submodules)
+        //console.log(`sidebar submodules`, submodules)
+       
         setSubmodules(submodules);
       })
       .catch(error => {
@@ -209,17 +211,18 @@ function Sidebar() {
           </div>
         </div>
   
-        {roleId==1 
+        {roleId==1||roleId==2 
                 ?
         <nav className="mt-2">
           <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             {modules.map(modules => (
-              <li className="nav-item" key={modules.id} onClick={() => handleClick(modules.id)}>
+              <li className="nav-item" key={modules.id} onClick={() => handleClick(modules.id,roleId)}>
                 <p className="nav-link">
                   <FontAwesomeIcon title={modules.name} icon={modules.icon} />&nbsp;
                   {modules.name}
                 </p>
                   <ul className="nav nav-treeview">
+                  
                   {submodules.map(submodules => (
                     <li className="nav-item" key={submodules.id}>
                       <Link to={submodules.link} className="nav-link active">

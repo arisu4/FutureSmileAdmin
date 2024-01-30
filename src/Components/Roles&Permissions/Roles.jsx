@@ -50,10 +50,10 @@ function Roles() {
 
    
   const fetchRoles= async(page,term) => {
-    console.log(`roles called`);
+    //console.log(`roles called`);
    await axios.post(`${baseURL}/admin/roles?page=${page}&pageSize=2&search=${term}`)
     .then(response=>{
-      console.log("roles page",response)
+      //console.log("roles page",response)
        const {roles,totalPages} = response.data;
         setRoles(roles);
         setTotalPages(totalPages);
