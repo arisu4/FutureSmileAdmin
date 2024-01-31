@@ -180,8 +180,8 @@ function Sidebar() {
     axios.get(`${baseURL}/admin/submodules/${id}/${roleId}`)
       .then(response => {
         const submodules = response.data;
-        //console.log(`sidebar submodules`, submodules)
-       
+        console.log(`sidebar submodules`, submodules)
+         //console.log("sidebar names",submodulepermit);
         setSubmodules(submodules);
       })
       .catch(error => {
@@ -223,11 +223,11 @@ function Sidebar() {
                 </p>
                   <ul className="nav nav-treeview">
                   
-                  {submodules.map(submodules => (
-                    <li className="nav-item" key={submodules.id}>
-                      <Link to={submodules.link} className="nav-link active">
+                  {submodules.map(subs => (
+                    <li className="nav-item" key={subs.id}>
+                      <Link to={subs.submodulepermit.link} className="nav-link active">
                         <i className="far fa-circle nav-icon"></i>
-                        <p>{submodules.sub_module_name}</p>
+                        <p>{subs.submodulepermit.sub_module_name}</p>
                       </Link>
                     </li>
                   )

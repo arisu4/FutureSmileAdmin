@@ -295,7 +295,7 @@ function Permissions() {
 
   const fetchModules = async (page,term) => {
 
-    await axios.get(`${baseURL}/admin/permission?page=${page}&pageSize=21&search=${term}`)
+    await axios.get(`${baseURL}/admin/permission?page=${page}&pageSize=23&search=${term}`)
       .then(response => {
         //console.log('response', response.data.PermissionData.data);
         //setPermissions(response.data.PermissionData.data)
