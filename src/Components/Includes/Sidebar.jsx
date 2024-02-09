@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+//import { version } from 'react';
 //Original 1
 // function Sidebar() {
 //   const [modules, setModules] = useState([])
@@ -107,11 +108,13 @@ function Sidebar() {
 
   const baseURL = 'http://localhost:1804'
 
-
+  //console.log("version",version);
   const roleId = localStorage.getItem('adminId') 
   //console.log("sidebar adminid",adminId);
+ const adminName = localStorage.getItem('adminname')
 
-
+ 
+ 
   // const renderSubmodules = (roleId) => {
   //   if (roleId==1) {
   //     return (
@@ -175,8 +178,12 @@ function Sidebar() {
 
 
   const handleClick = (id,roleid) => {
-    console.log("handle click ", id);
-    console.log("handle role ", roleId);
+    //console.log("handle click ", id);
+    localStorage.setItem('moduleId',id)
+    //console.log("handle role ", roleId);
+    //console.log(`submodules 1`, submodules)
+    //setSubmodules((x)=>({...x,}))
+    //console.log(`submodules 2`, submodules)
     axios.get(`${baseURL}/admin/submodules/${id}/${roleId}`)
       .then(response => {
         const submodules = response.data;
@@ -197,7 +204,7 @@ function Sidebar() {
       {/* Brand Logo */}
       <Link to="index3.html" className="brand-link">
         <img src="assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: '.8' }} />
-        <span className="brand-text font-weight-light ">Future Smile</span>
+        <span className="brand-text font-weight-light ">Future Smile {adminName}</span>
       </Link>
       {/* Sidebar */}
       <div className="sidebar">
@@ -207,7 +214,7 @@ function Sidebar() {
             <img src="assets/dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User " />
           </div>
           <div className="info ">
-            <Link to="/link" className="d-block">Alexander Pierce</Link>
+            <Link to="/link" className="d-block">{adminName}</Link>
           </div>
         </div>
   
@@ -222,13 +229,16 @@ function Sidebar() {
                   {modules.name}
                 </p>
                   <ul className="nav nav-treeview">
-                  
                   {submodules.map(subs => (
                     <li className="nav-item" key={subs.id}>
-                      <Link to={subs.submodulepermit.link} className="nav-link active">
+                      {subs.module_access==1 &&  subs.sub_module_access==1?
+                      <Link to={subs.submodulepermit.link}  className="nav-link active">
                         <i className="far fa-circle nav-icon"></i>
                         <p>{subs.submodulepermit.sub_module_name}</p>
                       </Link>
+                      :
+                      console.log("sidemodules is not permitted")
+                  }
                     </li>
                   )
                   )}

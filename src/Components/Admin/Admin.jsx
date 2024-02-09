@@ -22,10 +22,10 @@ function Admin() {
  
   
    const fetchAdmins= async(page,term) => {
-     console.log(`roles called`);
+     //console.log(`roles called`);
     await axios.post(`${baseURL}/admin/credential?page=${page}&pageSize=3&search=${term}`)
      .then(response=>{
-       console.log("admins page",response)
+       //console.log("admins page",response)
        //console.log("admins roles",response.data.role.roles);
         const {admins,totalPages} = response.data;
          setAdmins(admins);

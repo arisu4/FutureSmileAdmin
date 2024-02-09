@@ -59,6 +59,7 @@ const handleSubmit = (e) => {
       if (response.data.status === 1) {
         localStorage.setItem('adminToken',response.data.token)
         localStorage.setItem('adminId',response.data.roleId)
+        localStorage.setItem('adminname',response.data.rolename)
         toast.success(response.data.message, {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 2500,

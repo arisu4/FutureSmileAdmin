@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-
+import { useLocation } from 'react-router-dom';
 function Home() {
-
- 
+  // const location = useLocation();
+  // const data = location.state;
+  // console.log(data);
   return (
     <>
       <div className="content-wrapper">
@@ -12,6 +13,7 @@ function Home() {
             <div className="row mb-2">
               <div className="col-sm-6">
                 <h1>Home</h1>
+                
               </div>
               <div className="col-sm-6">
                 
@@ -39,7 +41,7 @@ function Home() {
 
                   <div className="form-group">
                     <h2>*Welcome Admin to Home page*</h2>
-                 
+                    {/* <p>{data}</p> */}
                   </div>
                 </div>
                 {/* /.form-group */}

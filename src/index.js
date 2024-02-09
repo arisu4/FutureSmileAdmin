@@ -4,12 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import PermissionProvider from './PermissionProvider/PermissionProvider'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  // <PermissionProvider>
   <BrowserRouter>
    <App />
   </BrowserRouter>
+  // </PermissionProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
