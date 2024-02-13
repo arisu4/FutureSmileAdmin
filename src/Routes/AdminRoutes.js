@@ -247,14 +247,16 @@ const ReusableLayout = () => (
 
 function AdminRoutes() {
 
-   const [allow,setAllow] = useState(false)
+   const [allow,setAllow] = useState()
 
 
  
   const roleId = localStorage.getItem('adminId') 
   const location  =  useLocation()
+  let status = location
+  console.log("status",status);
   let dir = location.pathname
-  console.log("location",dir);
+  console.log("dir",dir);
   
 
 
@@ -274,11 +276,13 @@ const fetchAccess = (roleid,path) => {
       .then(response => {
         const permit = response.data;
         console.log(`permit`, permit)
-        if(permit === 1){
-          setAllow(true)
+        if(permit === 0){
+          setAllow(false)
+         
         }
-        else{
-           setAllow(false)
+        if(permit === 1){
+           setAllow(true)
+           
         }
         //setSubmodules(submodules);
       })
@@ -331,16 +335,26 @@ const fetchAccess = (roleid,path) => {
         <Route path="/addservices" element={<Private Component={AddServices}/>} />
         <Route path="/editservices/:id" element={<Private Component={EditServices}/>} />
 
+        <Route path="/adminblog" element={<Private Component={Blog}/>} />
+
+
 
          {/* {dir === "/adminblog" && allow === true || allow===undefined?
         <Route path="/adminblog"  element={ <Private Component={Blog}/>} />
         :<Route path="/error"  element={ <Private Component={Errorpage}/>} />
          } */}
 
-       {dir === "/adminblog"?
-      <Route path="/adminblog"  element={ allow === true ? <Private Component={Blog}/>:<Navigate to="/error" />}/>
-      :console.log("downerror")
-      } 
+
+       
+      {/* {dir === "/adminblog" && allow === true ?
+      <Route path="/adminblog"  element={ <Private Component={Blog}/>}/>
+      :<Route path="/error"  element={ <Private Component={Errorpage}/>}/>
+      }
+
+        {dir ==='/adminblog' ?
+        <Route path="/adminblog" element={allow === true ? <Private Component={Blog}/>:<Navigate to="/error" />} />
+        :console.log("blog")
+        }  */}
 
 
   {/* <Route path="/adminblog"  element={isLoggedIn==="admin" ?<Private Component={Blog}/>:<Navigate to="/error" />} /> */}
@@ -376,10 +390,12 @@ const fetchAccess = (roleid,path) => {
         <Route path="/permissions" element={<Private Component={Permissions}/>} />
         
         {/* <Route path="/roles" element={isLoggedIn==="admin"?<Private Component={Roles}/>:<Navigate to="/error" />} /> */}
-        {/* {dir ==='/permissions' && allow===true ?
-        <Route path="/permissions" element={<Private Component={Permissions}/>} />
-        :<Route path="/error"  element={ <Private Component={Errorpage}/>} />
+        {/* {dir ==='/permissions' ?
+        <Route path="/permissions" element={allow === true ? <Private Component={Permissions}/>:<Navigate to="/error" />} />
+        :console.log("permit")
         } */}
+
+
         <Route path="/error" element={<Private Component={Errorpage}/>} />
         </Route>
        

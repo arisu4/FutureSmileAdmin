@@ -221,7 +221,7 @@ function Sidebar() {
         {roleId==1||roleId==2 
                 ?
         <nav className="mt-2">
-          <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" >
             {modules.map(modules => (
               <li className="nav-item" key={modules.id} onClick={() => handleClick(modules.id,roleId)}>
                 <p className="nav-link">
@@ -284,6 +284,23 @@ function Sidebar() {
   )
 }
 
+
+
+// Dynamic binding to on 'click' and Toggle the nested nav
+// $('.nav-list').on('click', '.nav-click', function(){
+//   $('.nav-submenu').not($(this).siblings('.nav-submenu')).hide();
+//   $('.nav-item .nav-click').not(this).removeClass('icon-close'); 
+//   $(this).siblings('.nav-submenu').toggle();
+//   $(this).toggleClass('icon-close');  
+// });
+
+// in line number 224 ul remove data-accordion="false" then only  one sub-menu at a time
+
+//other options
+//How to Close Sidebar menu dropdown when the user opens second dropdown in adminlte?
+// $('#main-side .has-treeview').click(function(){
+//   $(this).siblings('.menu-open').removeClass('menu-open').children('.nav-treeview').slideToggle();
+// })
 
 
 
