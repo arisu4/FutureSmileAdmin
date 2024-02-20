@@ -47,12 +47,12 @@ import axios from 'axios'
 
 function PermissionProvider(props){
     
- const roleId = localStorage.getItem('adminId')
- const moduleId = localStorage.getItem('moduleId')
+//  const roleId = localStorage.getItem('adminId')
+//  const moduleId = localStorage.getItem('moduleId')
 
     //console.log("permission roleId",roleId)
-    const [permit,setPermit] = useState()
-    const [allowed,setAllowed] = useState(false)
+    // const [permit,setPermit] = useState()
+    // const [allowed,setAllowed] = useState(false)
     
     
     // const baseURL  =  'http://localhost:1804'
@@ -63,42 +63,42 @@ function PermissionProvider(props){
 
 
 
-    const value = useMemo(()=>(
-      {permit}),[permit]
-    )
+    // const value = useMemo(()=>(
+    //   {permit}),[permit]
+    // )
       
 
       
 
       //let value = useMemo(() => (access),[access])
 
-      console.log("values",value);
+      //console.log("values",value);
    
-    const fetchPermissions = (roleId,moduleId) => {
-        const baseURL  =  'http://localhost:1804'
+    // const fetchPermissions = (roleId,moduleId) => {
+    //     const baseURL  =  'http://localhost:1804'
 
-        // let id = roleId
-        axios.get(`${baseURL}/admin/permitprovider/${roleId}/${moduleId}`)
-        .then(response=>{
-          console.log("permission ",response.data);
-            //const access = response.data
-            //console.log("permission object",access);
-          //const {permissions,totalPages} = response.data;
-             //setPermit(access);
+    //     // let id = roleId
+    //     axios.get(`${baseURL}/admin/permitprovider/${roleId}/${moduleId}`)
+    //     .then(response=>{
+    //       console.log("permission ",response.data);
+    //         //const access = response.data
+    //         //console.log("permission object",access);
+    //       //const {permissions,totalPages} = response.data;
+    //          //setPermit(access);
        
-        })
-        .catch(error=>{
-           console.log(error)
-        })
-       }
+    //     })
+    //     .catch(error=>{
+    //        console.log(error)
+    //     })
+    //    }
 
     //console.log("acess",access);
     //console.log("value",value);
     //value.access.[0].sub_module.access
 
-    useEffect(() => {
-        fetchPermissions(roleId,moduleId); 
-      }, [roleId,moduleId]); 
+    // useEffect(() => {
+    //     fetchPermissions(roleId,moduleId); 
+    //   }, [roleId,moduleId]); 
 
       //let isAllowedTo =  function () { return true };
 
@@ -113,29 +113,29 @@ function PermissionProvider(props){
       // }
 
 
-      return(
+      // return(
 
-      // <PermissionContext.Provider  value={value}
-      // //value={value}
-      // >
-      // {/* <MyComponent /> */}
-      // {/* <Adminroutes /> */}
+      // // <PermissionContext.Provider  value={value}
+      // // //value={value}
+      // // >
+      // // {/* <MyComponent /> */}
+      // // {/* <Adminroutes /> */}
      
 
-      // {props.children}
-      // </PermissionContext.Provider>
+      // // {props.children}
+      // // </PermissionContext.Provider>
 
 
-      <PermissionContext.Provider  value={allowed}
-      //value={value}
-      >
-      {/* <MyComponent /> */}
-      {/* <Adminroutes /> */}
+      // // <PermissionContext.Provider  value={allowed}
+      // // //value={value}
+      // // >
+      // // {/* <MyComponent /> */}
+      // // {/* <Adminroutes /> */}
      
 
-      {props.children}
-      </PermissionContext.Provider>
-        )
+      // // {props.children}
+      // // </PermissionContext.Provider>
+      //   )
       
     } 
       

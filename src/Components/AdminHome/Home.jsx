@@ -1,9 +1,33 @@
-import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom';
+import React, { useEffect,useState } from 'react'
+import { useNavigate } from "react-router-dom";
+//import { useLocation } from 'react-router-dom';
 function Home() {
+  const [finishStatus, setfinishStatus] = useState(false)
+  const navigate = useNavigate();
   // const location = useLocation();
   // const data = location.state;
   // console.log(data);
+
+  const onBackButtonEvent = (e) => {
+    e.preventDefault();
+    if (!finishStatus) {
+        if (window.confirm("Do you want to go to login window ?")) {
+            setfinishStatus(true)
+            navigate("/");
+        } else {
+            window.history.pushState(null, null, window.location.pathname);
+            setfinishStatus(false)
+        }
+    }
+}
+  useEffect(() => {
+    window.history.pushState(null, null, window.location.pathname);
+    window.addEventListener('popstate', onBackButtonEvent);
+    return () => {
+      window.removeEventListener('popstate', onBackButtonEvent);  
+    };
+  }, []);
+
   return (
     <>
       <div className="content-wrapper">
@@ -38,7 +62,6 @@ function Home() {
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
-
                   <div className="form-group">
                     <h2>*Welcome Admin to Home page*</h2>
                     {/* <p>{data}</p> */}

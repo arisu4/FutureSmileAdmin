@@ -162,7 +162,7 @@
 
 import React from 'react'
 import {useState,useEffect} from 'react'
-import { Routes, Route,Navigate} from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import {useLocation} from  'react-router-dom'
 import {Outlet} from 'react-router-dom'
 import  axios from 'axios'
@@ -223,7 +223,7 @@ import EditFaq from '../Components/AdminHome/Faq/EditFaq';
 import Private from '../Private';
 
 import Errorpage from  '../Components/Includes/Errorpage'
-
+import Otp from '../Components/AdminOtp/Otp'
 
 
 // const Home = lazy(() => import('../Pages/Home/Home'));
@@ -301,6 +301,7 @@ const fetchAccess = (roleid,path) => {
         <Route path="/" element={<Login/>} />
 
         {/* <Route path="/error" element={<Errorpage/>} /> */}
+        <Route path="/otp" element={<Private Component={Otp}/>} />
         
         <Route element={<ReusableLayout/>}>
          
@@ -388,6 +389,8 @@ const fetchAccess = (roleid,path) => {
         <Route path="/roles" element={<Private Component={Roles}/>} />
 
         <Route path="/permissions" element={<Private Component={Permissions}/>} />
+
+       
         
         {/* <Route path="/roles" element={isLoggedIn==="admin"?<Private Component={Roles}/>:<Navigate to="/error" />} /> */}
         {/* {dir ==='/permissions' ?
